@@ -56,4 +56,4 @@ This repository is designated as an **AI-free coding zone**. Please see [AGENTS.
 
 ## License
 
-This is a template repository - use it however you like!
+None - use it however you like!
