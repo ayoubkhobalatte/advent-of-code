@@ -18,11 +18,11 @@ class Day6Test {
 
     @Test
     fun testExample2() {
-        assertEquals(-1L, day.solvePart2("src/main/resources/2025/day6/example.txt"))
+        assertEquals(3263827L, day.solvePart2("src/main/resources/2025/day6/example.txt"))
     }
 
     @Test
     fun testInput2() {
-        assertEquals(-1L, day.solvePart2("src/main/resources/2025/day6/input.txt"))
+        assertEquals(10600728112865L, day.solvePart2("src/main/resources/2025/day6/input.txt"))
     }
 }

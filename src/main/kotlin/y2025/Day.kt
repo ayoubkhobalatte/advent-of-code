@@ -8,9 +8,13 @@ abstract class Day {
 
     abstract fun solvePart2(file: String): Long
 
-    fun readLines(file: String): List<String> =
+    fun readLines(
+        file: String,
+        filter: (String) -> Boolean = { it.isNotBlank() },
+        transform: (String) -> String = { it.trim() },
+    ): List<String> =
         Files
             .readAllLines(Path.of(file))
-            .filter { it.isNotBlank() }
-            .map { it.trim() }
+            .filter { filter(it) }
+            .map { transform(it) }
 }
