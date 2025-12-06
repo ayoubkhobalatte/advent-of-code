@@ -8,12 +8,12 @@ class Day6Test {
 
     @Test
     fun testExample1() {
-        assertEquals(-1L, day.solvePart1("src/main/resources/2025/day6/example.txt"))
+        assertEquals(4277556L, day.solvePart1("src/main/resources/2025/day6/example.txt"))
     }
 
     @Test
     fun testInput1() {
-        assertEquals(-1L, day.solvePart1("src/main/resources/2025/day6/input.txt"))
+        assertEquals(6725216329103L, day.solvePart1("src/main/resources/2025/day6/input.txt"))
     }
 
     @Test
