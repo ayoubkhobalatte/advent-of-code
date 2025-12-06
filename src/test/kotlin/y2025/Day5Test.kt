@@ -2,7 +2,6 @@
 
 package y2025
 
-import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

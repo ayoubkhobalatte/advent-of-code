@@ -1,12 +1,8 @@
-@file:Suppress("SpellCheckingInspection")
-
 package y2025
 
-import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@Ignore
 class Day6Test {
     private val day = Day6()
 
