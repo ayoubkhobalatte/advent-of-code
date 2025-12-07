@@ -3,11 +3,13 @@
 package y2025
 
 class Day7 : Day() {
+    private val part2Cache: MutableMap<String, Long> = mutableMapOf()
+
     override fun solvePart1(file: String): Long {
         val lines = readLines(file)
             .map { it.toCharArray() }
 
-        val startState = lines[0].map { if (it == 'S') true else false }
+        val startState = lines[0].map { it == 'S' }
         var r = 0L
 
         var lineState = startState
@@ -54,5 +56,64 @@ class Day7 : Day() {
         val splits: Int,
     )
 
-    override fun solvePart2(file: String): Long = 0L
+    override fun solvePart2(file: String): Long {
+        val lines = readLines(file)
+            .filterIndexed { i, _ -> i != 1 } // unnecessary line in input
+            .map { it.toCharArray().map { c -> c != '.' } }
+
+        return traverse(0, lines, lines[0])
+    }
+
+    fun traverse(
+        rowIndex: Int,
+        lines: List<Line>,
+        current: Line,
+    ): Long {
+        val cellIndex = current.indexOf(true)
+
+        val key = "$rowIndex-$cellIndex"
+        if (part2Cache.containsKey(key)) {
+            return part2Cache[key]!!
+        }
+
+        val timelines = if (rowIndex == lines.size - 1) {
+            1L
+        } else {
+            val (left, center, right) = findPossibleStates(cellIndex, current, lines[rowIndex + 1])
+
+            var timelines = 0L
+
+            left?.let { timelines += traverse(rowIndex + 2, lines, it) }
+            center?.let { timelines += traverse(rowIndex + 2, lines, it) }
+            right?.let { timelines += traverse(rowIndex + 2, lines, it) }
+
+            timelines
+        }
+
+        part2Cache[key] = timelines
+
+        return timelines
+    }
+
+    fun findPossibleStates(
+        index: Int,
+        oldState: Line,
+        splitter: Line,
+    ): Triple<Line?, Line?, Line?> {
+        if (splitter[index]) {
+            return Triple(
+                oldState.mapIndexed { i, s -> i == index - 1 },
+                null,
+                oldState.mapIndexed { i, s -> i == index + 1 },
+            )
+        }
+
+        return Triple(
+            null,
+            oldState,
+            null,
+        )
+    }
 }
+
+typealias Line = List<Boolean>
