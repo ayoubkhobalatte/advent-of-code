@@ -4,18 +4,17 @@ import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@Ignore
 class Day7Test {
     private val day = Day7()
 
     @Test
     fun testExample1() {
-        assertEquals(-1L, day.solvePart1("src/main/resources/2025/day7/example.txt"))
+        assertEquals(21L, day.solvePart1("src/main/resources/2025/day7/example.txt"))
     }
 
     @Test
     fun testInput1() {
-        assertEquals(-1L, day.solvePart1("src/main/resources/2025/day7/input.txt"))
+        assertEquals(1622L, day.solvePart1("src/main/resources/2025/day7/input.txt"))
     }
 
     @Test

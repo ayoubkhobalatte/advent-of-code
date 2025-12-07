@@ -4,7 +4,6 @@ import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@Ignore
 class Day8Test {
     private val day = Day8()
 
