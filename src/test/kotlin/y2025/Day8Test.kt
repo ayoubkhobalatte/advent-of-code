@@ -18,13 +18,13 @@ class Day8Test {
 
     @Test
     fun testExample2() {
-        val day = Day8(3)
+        val day = Day8(0)
         assertEquals(25272L, day.solvePart2("src/main/resources/2025/day8/example.txt"))
     }
 
     @Test
     fun testInput2() {
-        val day = Day8(1000)
-        assertEquals(-1L, day.solvePart2("src/main/resources/2025/day8/input.txt"))
+        val day = Day8(0)
+        assertEquals(3767453340L, day.solvePart2("src/main/resources/2025/day8/input.txt"))
     }
 }

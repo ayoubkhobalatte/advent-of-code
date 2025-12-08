@@ -1,4 +1,4 @@
-@file:Suppress("SpellCheckingInspection")
+@file:Suppress("DuplicatedCode")
 
 package y2025
 
@@ -66,7 +66,60 @@ class Day8(
             .toLong()
     }
 
-    override fun solvePart2(file: String): Long = 0L
+    override fun solvePart2(file: String): Long {
+        val points = readLines(file)
+            .mapIndexed { i, line ->
+                line.split(",").let {
+                    Point(i, it[0].toInt(), it[1].toInt(), it[2].toInt())
+                }
+            }
+
+        val distances = points
+            .flatMapIndexed { i, p1 ->
+                points
+                    .filterIndexed { j, _ -> j > i }
+                    .mapIndexed { j, p2 ->
+                        Distance(distance(p1, p2), p1, p2)
+                    }
+            }.toMutableList()
+
+        distances.sortBy { it.distance }
+
+        val shortcuts = mutableMapOf<Int, Circuit>()
+        points.forEach {
+            shortcuts[it.id] = Circuit(id = it.id, points = linkedSetOf(it)) // Keep insertion order
+        }
+
+        distances
+            .forEach { d ->
+                val id1 = d.p1.id
+                val id2 = d.p2.id
+
+                val c1 = shortcuts[id1]!!
+                val c2 = shortcuts[id2]!!
+
+                if (c1 == c2) {
+                    // Both points already in same circuit. Nothing to do
+                    return@forEach
+                }
+
+                // point all moved endpoints from circuit 2 to their new home
+                c2.points.forEach { p -> shortcuts[p.id] = c1 }
+
+                // Copy them over to circuit 1
+                c1.points.addAll(c2.points)
+
+                // Clear circuit 2 (not really necessary, GC will handle it eventually)
+                c2.points.removeAll { true }
+
+                // check if c1 contains all points
+                if (c1.points.size == points.size) {
+                    return d.p1.x.toLong() * d.p2.x.toLong()
+                }
+            }
+
+        return 0L // we never got fully linked points
+    }
 }
 
 data class Circuit(
