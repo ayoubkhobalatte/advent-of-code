@@ -1,21 +1,19 @@
 package y2025
 
-import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@Ignore
 class Day9Test {
     private val day = Day9()
 
     @Test
     fun testExample1() {
-        assertEquals(-1L, day.solvePart1("src/main/resources/2025/day9/example.txt"))
+        assertEquals(50L, day.solvePart1("src/main/resources/2025/day9/example.txt"))
     }
 
     @Test
     fun testInput1() {
-        assertEquals(-1L, day.solvePart1("src/main/resources/2025/day9/input.txt"))
+        assertEquals(4754955192L, day.solvePart1("src/main/resources/2025/day9/input.txt"))
     }
 
     @Test
